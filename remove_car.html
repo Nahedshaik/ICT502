@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Remove Car</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Remove Car</h1>
+    </header>
+    <nav>
+        <!-- Navigation links -->
+    </nav>
+    <section>
+        <h2>Car List</h2>
+        <table id="carTable">
+            <thead>
+                <tr>
+                    <th>Make</th>
+                    <th>Model</th>
+                    <th>Year</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="carTableBody">
+                <!-- Car rows will be dynamically added here -->
+            </tbody>
+        </table>
+    </section>
+    <footer>
+        <!-- Footer content -->
+    </footer>
+
+    <script>
+        // Sample car records
+        var cars = [
+            { id: 1, make: 'Toyota', model: 'Camry', year: 2020 },
+            { id: 2, make: 'Honda', model: 'Civic', year: 2019 },
+            { id: 3, make: 'Ford', model: 'Fusion', year: 2018 },
+            // Add more car records here...
+        ];
+
+        // Function to display cars in the table
+        function displayCars() {
+            var tableBody = document.getElementById('carTableBody');
+            tableBody.innerHTML = '';
+
+            cars.forEach(function(car) {
+                var newRow = document.createElement('tr');
+                newRow.innerHTML = `
+                    <td>${car.make}</td>
+                    <td>${car.model}</td>
+                    <td>${car.year}</td>
+                    <td><button onclick="removeCar(${car.id})">Remove</button></td>
+                `;
+                tableBody.appendChild(newRow);
+            });
+        }
+
+        // Function to remove a car
+        function removeCar(carId) {
+            var index = cars.findIndex(function(car) {
+                return car.id === carId;
+            });
+
+            if (index !== -1) {
+                cars.splice(index, 1);
+                displayCars();
+                alert('Car removed successfully!');
+            } else {
+                alert('Car not found!');
+            }
+        }
+
+        // Display initial car records on page load
+        displayCars();
+    </script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Car</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Add Car</h1>
+    </header>
+    <nav>
+        <!-- Navigation links -->
+    </nav>
+    <section>
+        <form id="addCarForm">
+            <label for="make">Make:</label>
+            <input type="text" id="make" name="make" required><br><br>
+            <label for="model">Model:</label>
+            <input type="text" id="model" name="model" required><br><br>
+            <label for="year">Year:</label>
+            <input type="number" id="year" name="year" required><br><br>
+            <button type="submit">Add Car</button>
+        </form>
+
+        <table id="carTable">
+            <thead>
+                <tr>
+                    <th>Make</th>
+                    <th>Model</th>
+                    <th>Year</th>
+                </tr>
+            </thead>
+            <tbody id="carTableBody">
+                <!-- Table rows will be dynamically added here -->
+            </tbody>
+        </table>
+    </section>
+    <footer>
+        <!-- Footer content -->
+    </footer>
+
+    <script>
+        document.getElementById('addCarForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            var make = document.getElementById('make').value;
+            var model = document.getElementById('model').value;
+            var year = document.getElementById('year').value;
+            
+            var newRow = document.createElement('tr');
+            newRow.innerHTML = `
+                <td>${make}</td>
+                <td>${model}</td>
+                <td>${year}</td>
+            `;
+            
+            document.getElementById('carTableBody').appendChild(newRow);
+            
+            // Clear form fields after adding car
+            document.getElementById('addCarForm').reset();
+        });
+    </script>
+</body>
+</html>

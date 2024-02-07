@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Car</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f5f9; /* Light blue background */
+        }
+
+        header {
+            background-color: #007bff; /* Blue header */
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            text-align: center;
+        }
+
+        nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+
+        nav ul li a {
+            color: #007bff; /* Blue links */
+            text-decoration: none;
+        }
+
+        section {
+            padding: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        input[type="text"] {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Search Car</h1>
+    </header>
+    <nav>
+        <!-- Navigation links -->
+    </nav>
+    <section>
+        <input type="text" id="searchInput" placeholder="Enter keyword to search">
+        <button onclick="searchCars()">Search</button>
+
+        <table id="carTable">
+            <thead>
+                <tr>
+                    <th>Make</th>
+                    <th>Model</th>
+                    <th>Year</th>
+                </tr>
+            </thead>
+            <tbody id="carTableBody">
+                <!-- Table rows will be dynamically added here -->
+            </tbody>
+        </table>
+    </section>
+    <footer>
+        <!-- Footer content -->
+    </footer>
+
+    <script>
+        // Sample car records
+        var cars = [
+            { make: 'Toyota', model: 'Camry', year: 2020 },
+            { make: 'Honda', model: 'Civic', year: 2019 },
+            { make: 'Ford', model: 'Fusion', year: 2018 },
+            // Add more car records here...
+        ];
+
+        // Function to display cars in the table
+        function displayCars() {
+            var tableBody = document.getElementById('carTableBody');
+            tableBody.innerHTML = '';
+
+            for (var i = 0; i < cars.length; i++) {
+                var car = cars[i];
+                var newRow = document.createElement('tr');
+                newRow.innerHTML = `
+                    <td>${car.make}</td>
+                    <td>${car.model}</td>
+                    <td>${car.year}</td>
+                `;
+                tableBody.appendChild(newRow);
+            }
+        }
+
+        // Function to search for cars
+        function searchCars() {
+            var keyword = document.getElementById('searchInput').value.toLowerCase();
+            var filteredCars = cars.filter(function(car) {
+                return car.make.toLowerCase().includes(keyword) ||
+                       car.model.toLowerCase().includes(keyword) ||
+                       String(car.year).includes(keyword);
+            });
+            displaySearchResults(filteredCars);
+        }
+
+        // Function to display search results
+        function displaySearchResults(results) {
+            var tableBody = document.getElementById('carTableBody');
+            tableBody.innerHTML = '';
+
+            for (var i = 0; i < results.length; i++) {
+                var car = results[i];
+                var newRow = document.createElement('tr');
+                newRow.innerHTML = `
+                    <td>${car.make}</td>
+                    <td>${car.model}</td>
+                    <td>${car.year}</td>
+                `;
+                tableBody.appendChild(newRow);
+            }
+        }
+
+        // Display initial car records on page load
+        displayCars();
+    </script>
+</body>
+</html>
